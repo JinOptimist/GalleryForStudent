@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "AddImage";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@section head
+{
+    <script src="~/Script/jTest.js"></script>
+}
+
+
+<h2>Загрузить картинку</h2>
+
+@using (Html.BeginForm("AddImage", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <p class="message"></p>
+        <p>
+            Выберите картинку <input type="file" name="file" id="file" multiple accept="image/*"/>
+        </p>
+        <p>
+            <input type="submit" id="submit" value="Загрузить"/>
+        </p>
+        <p>
+            <img id="preview"/>
+        </p>
+    </div>
+}
+
