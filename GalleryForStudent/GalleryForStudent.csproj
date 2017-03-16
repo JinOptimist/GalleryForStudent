@@ -103,6 +103,7 @@
     <Content Include="Script\module.js" />
     <Content Include="Script\jTest.js" />
     <Content Include="Script\angular.min.js" />
+    <Content Include="Views\Angular\text.html" />
     <Content Include="Views\Angular\addImg.html" />
     <Content Include="Web.config" />
   </ItemGroup>

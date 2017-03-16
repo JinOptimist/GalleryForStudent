@@ -13,6 +13,10 @@ angular.module('gallery', ['ngRoute'])
                     templateUrl: '/views/Angular/addImg.html',
                     controller: 'AddImgController'
                 })
+                .when('/Angular/text', {
+                    templateUrl: '/views/Angular/text.html',
+                    controller: 'TextController'
+                })
                 .otherwise({
                     redirectTo: '/Angular/gallery'
                 });
@@ -21,12 +25,32 @@ angular.module('gallery', ['ngRoute'])
             $locationProvider.html5Mode(true);
         }
     ])
+    .controller('TextController', ['$scope', function ($scope) {
+        $scope.text = "testa adsf asdf asdf asdf asdf";
+        $scope.isEdit = false;
+
+        $scope.goEdit = function () {
+            $scope.isEdit = true;
+        }
+
+        $scope.applyEdit = function () {
+            $scope.isEdit = false;
+        }
+    }])
+
+
+
+
     .controller('GalleryController', ['$scope', 'dataCenter', function ($scope, dataCenter) {
         $scope.remove = function (index) {
             dataCenter.remove(index);
         }
 
-        $scope.guitars = dataCenter.getAll();
+        dataCenter.getAll().then(function (response) {
+            $scope.guitars = response.data;
+        });
+
+        var a = 123;
     }])
     .controller('AddImgController', ['$scope', 'dataCenter', function ($scope, dataCenter) {
         $scope.img = {};
@@ -35,27 +59,12 @@ angular.module('gallery', ['ngRoute'])
             dataCenter.add($scope.img);
         }
     }])
-    .service('dataCenter', function () {
-        var guitars = [
-            {
-                id: 1,
-                desc: "My first guiatr",
-                src: "/content/img/1.jpg"
-            },
-            {
-                id: 2,
-                desc: "Cute",
-                src: "/content/img/2.gif"
-            },
-            {
-                id: 3,
-                desc: "qwe",
-                src: "/content/img/3.jpg"
-            }
-        ];
-
+    .service('dataCenter', ['$http', function ($http) {
         function getAll() {
-            return guitars;
+            var respons = $http({
+                url: 'http://localhost:56448/Image/GetImages'
+            });
+            return respons;
         };
 
         return {
@@ -69,4 +78,4 @@ angular.module('gallery', ['ngRoute'])
         }
 
         
-    });
+    }]);
