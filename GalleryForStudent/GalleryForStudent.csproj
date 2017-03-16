@@ -94,9 +94,16 @@
     <Content Include="Content\img\3.jpg" />
     <Content Include="Content\style\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Script\jquery-3.1.1.min.js" />
+    <Content Include="Script\module.js" />
     <Content Include="Script\jTest.js" />
     <Content Include="Script\angular.min.js" />
+    <Content Include="Views\Angular\addImg.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +125,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\AddImage.cshtml" />
     <None Include="Properties\PublishProfiles\dev.pubxml" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Views\Angular\gallery.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

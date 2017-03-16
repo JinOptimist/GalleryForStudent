@@ -1,14 +1,17 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="gallery">
 <head>
+    <base href="/"/>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <script src="~/Script/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Script/module.js"></script>
     <link href="~/Content/style/style.css" rel="stylesheet" type="text/css"  />
 </head>
 <body>
-<div>
-    Привет
-</div>
+    <h1>Angular main page</h1>
+    <a href="/Angular/gallery">gallery</a> | <a href="/Angular/addImg">addImg</a>
+    <div ng-view>Loading...</div>
 </body>
 </html>
