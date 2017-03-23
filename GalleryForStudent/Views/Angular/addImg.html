@@ -1,10 +1,13 @@
 ﻿<div>
     <h2>Add img</h2>
     <p>
-        src <input ng-model="img.src" />
+        name <input id="name" ng-model="img.name" />
     </p>
     <p>
-        desc <input ng-model="img.desc" />
+        file <input type="file" fileread="img.data" />
+    </p>
+    <p>
+        desc <input id="desc" ng-model="img.desc" />
     </p>
     <input type="button" value="add" ng-click="addImg()" />
 </div>

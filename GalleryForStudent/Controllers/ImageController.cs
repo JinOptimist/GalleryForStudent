@@ -23,6 +23,14 @@ namespace GalleryForStudent.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult RemoveImage(string url)
+        {
+            var path = Server.MapPath(url);
+            System.IO.File.Delete(path);
+            
+            return Json(true);
+        }
+
         public JsonResult AddImageAjax(string fileName, string data)
         {
             var dataIndex = data.IndexOf("base64", StringComparison.Ordinal) + 7;

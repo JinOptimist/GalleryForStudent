@@ -42,12 +42,16 @@ angular.module('gallery', ['ngRoute'])
 
 
     .controller('GalleryController', ['$scope', 'dataCenter', function ($scope, dataCenter) {
-        $scope.remove = function (index) {
-            dataCenter.remove(index);
+        $scope.remove = function (url) {
+            dataCenter.remove(url);
         }
 
-        dataCenter.getAll().then(function (response) {
+        var defered = dataCenter.getAll();
+        defered.then(function (response) {
             $scope.guitars = response.data;
+        });
+        defered.error(function () {
+
         });
 
         var a = 123;
@@ -56,26 +60,62 @@ angular.module('gallery', ['ngRoute'])
         $scope.img = {};
 
         $scope.addImg = function () {
-            dataCenter.add($scope.img);
+            dataCenter.add($scope.img.name, $scope.img.data);
+            $scope.img = {};
         }
     }])
     .service('dataCenter', ['$http', function ($http) {
+        return {
+            getAll: getAll,
+            add: add,
+            remove: remove
+        };
+
         function getAll() {
-            var respons = $http({
+            return $http({
                 url: 'http://localhost:56448/Image/GetImages'
+            });
+        }
+
+        function add(fileName, data) {
+            var respons = $http({
+                method: 'POST',
+                url: 'http://localhost:56448/Image/AddImageAjax',
+                data: {
+                    fileName: fileName,
+                    data: data
+                },
+                headers: { 'Accept': 'application/json' }
             });
             return respons;
         };
 
+        function remove(url) {
+            return $http({
+                method: 'POST',
+                url: 'http://localhost:56448/Image/RemoveImage',
+                data: {
+                    url: url
+                },
+                headers: { 'Accept': 'application/json' }
+            });
+        }
+    }])
+    .directive("fileread", [function () {
         return {
-            getAll: getAll,
-            add: function (newOne) {
-                guitars.push(newOne);
+            scope: {
+                fileread: "="
             },
-            remove: function (index) {
-                guitars.splice(index, 1);
+            link: function (scope, element, attributes) {
+                element.bind("change", function (changeEvent) {
+                    var reader = new FileReader();
+                    reader.onload = function (loadEvent) {
+                        scope.$apply(function () {
+                            scope.fileread = loadEvent.target.result;
+                        });
+                    }
+                    reader.readAsDataURL(changeEvent.target.files[0]);
+                });
             }
         }
-
-        
-    }]);
+    }]);;
