@@ -42,19 +42,15 @@ angular.module('gallery', ['ngRoute'])
 
 
     .controller('GalleryController', ['$scope', 'dataCenter', function ($scope, dataCenter) {
-        $scope.remove = function (url) {
+        $scope.remove = function (url, index) {
             dataCenter.remove(url);
+            $scope.guitars.splice(index, 1);
         }
 
         var defered = dataCenter.getAll();
         defered.then(function (response) {
             $scope.guitars = response.data;
         });
-        defered.error(function () {
-
-        });
-
-        var a = 123;
     }])
     .controller('AddImgController', ['$scope', 'dataCenter', function ($scope, dataCenter) {
         $scope.img = {};
@@ -118,4 +114,4 @@ angular.module('gallery', ['ngRoute'])
                 });
             }
         }
-    }]);;
+    }]);

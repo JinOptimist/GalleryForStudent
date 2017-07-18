@@ -1,9 +1,7 @@
 ﻿<div>
     <h2>Index</h2>
-    <div ng-repeat="img in guitars">
-        test
-        <span>{{img.Name}}</span>
+    <div ng-repeat="img in guitars" class="image-block">
+        <p>{{img.Name}} <input type="button" value="del" ng-click="remove(img.Url, $index)" /></p>
         <img ng-src="{{img.Url}}" />
-        <input type="button" value="del" ng-click="remove(img.Url)" />
     </div>
 </div>

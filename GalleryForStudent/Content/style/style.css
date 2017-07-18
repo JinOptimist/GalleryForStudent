@@ -10,3 +10,7 @@
 .message {
     color: green;
 }
+
+.image-block img{
+    max-width: 200px;
+}
